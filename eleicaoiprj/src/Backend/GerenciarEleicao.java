@@ -7,6 +7,11 @@ package Backend;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
 
 /**
  *
@@ -14,22 +19,51 @@ import java.util.Date;
  */
 public class GerenciarEleicao {
     
-    private Integer idGerenciar;
+    private static Integer idGerenciar = 0;
     private ArrayList<Candidato> candidatos;
     private Integer qntdevagas;
     private Date dataeleicao;
     private TipoEleicao tipodeeleicao;
-    private static GerenciarEleicao instance;
-
-
-    private GerenciarEleicao(){        
+    private ComputarVotos mapvotos;
+    
+    public GerenciarEleicao(){        
+        
+        idGerenciar++;
+        candidatos = new ArrayList<Candidato>();
+        qntdevagas = 0;
+        dataeleicao = new Date();
+        tipodeeleicao = TipoEleicao.DIACONOS;
+        mapvotos = new ComputarVotos();
+        
     }    
+
+    public void setIdGerenciar(Integer idGerenciar) {
+        this.idGerenciar = idGerenciar;
+    }
+
+    public void setCandidatos(ArrayList<Candidato> candidatos) {
+        this.candidatos = candidatos;
+    }
+
+    public void setMapvotos(ComputarVotos mapvotos) {
+        this.mapvotos = mapvotos;
+    }
+
+    public Integer getIdGerenciar() {
+        return idGerenciar;
+    }
+
+    public ComputarVotos getMapvotos() {
+        return mapvotos;
+    }
     
     public ArrayList<Candidato> getCandidatos() {
         return candidatos;
     }
 
     public void addCandidatos(Candidato candidato) {
+        System.out.println("### Incluindo candidato na lista: ####"+candidato.getNome()+" "+candidato.getSobrenome());
+        
         this.candidatos.add(candidato);
     }
     
@@ -42,6 +76,9 @@ public class GerenciarEleicao {
     }
 
     public void setQntdevagas(Integer qntdevagas) {
+        
+        System.out.println("###Quantidade de vagas:"+qntdevagas.toString());
+        
         this.qntdevagas = qntdevagas;
     }
 
@@ -50,6 +87,8 @@ public class GerenciarEleicao {
     }
 
     public void setDataeleicao(Date dataeleicao) {
+        System.out.println("###Data da eleicao:"+dataeleicao.getTime());
+        
         this.dataeleicao = dataeleicao;
     }
 
@@ -58,12 +97,29 @@ public class GerenciarEleicao {
     }
 
     public void setTipodeeleicao(TipoEleicao tipodeeleicao) {
-        this.tipodeeleicao = tipodeeleicao;
-    }
-    public static synchronized GerenciarEleicao getInstance(){
-        if(instance == null)
-             instance = new GerenciarEleicao();
         
-        return instance;
+        System.out.println("###Tipo de Eleicao:"+tipodeeleicao.name());
+        
+        this.tipodeeleicao = tipodeeleicao;
+    }    
+    public void printComputarVotos(){
+        
+        HashMap<Integer, Voto> lista = mapvotos.getMapavotos();
+        
+        for(HashMap.Entry<Integer, Voto> ind : lista.entrySet()){
+            
+            System.out.println("#### Voto ind:"+ind.getKey());
+            Voto voto = ind.getValue();
+            
+            for(Candidato can : voto.getCand_selecionados()){
+                System.out.println("Candidato: "+can.getNome());
+            }
+        
+        }
+        
+    }
+
+    private void foreach(HashMap<Voto, Integer> mapavotos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

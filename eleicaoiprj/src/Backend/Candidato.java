@@ -14,7 +14,29 @@ public class Candidato {
     private String nome;
     private String sobrenome;
     private String camfoto;
-    private Integer idcandidato;
+    private static Integer idcandidato = 0 ;
+    
+    public Candidato(){
+        
+        idcandidato++;
+        
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public String getCamfoto() {
+        return camfoto;
+    }
+
+    public Integer getIdcandidato() {
+        return idcandidato;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -27,9 +49,4 @@ public class Candidato {
     public void setCamfoto(String camfoto) {
         this.camfoto = camfoto;
     }
-
-    public void setIdcandidato(Integer idcandidato) {
-        this.idcandidato = idcandidato;
-    }
-    
 }

@@ -6,6 +6,7 @@
 package Backend;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -13,15 +14,22 @@ import java.util.HashMap;
  */
 public class ComputarVotos {
     
-    private static Integer idvoto = 0;
-    private HashMap<Voto,Integer> mapavotos = new HashMap<Voto,Integer>();
-
-    public HashMap<Voto, Integer> getMapavotos() {
+    private static Integer idvoto;
+    private HashMap<Integer,Voto> mapavotos;
+    
+    public ComputarVotos(){
+        
+        mapavotos = new HashMap<Integer,Voto>();
+        idvoto = 0;
+        
+    }
+    public HashMap<Integer, Voto> getMapavotos() {
         return mapavotos;
     }
 
     public void addVoto(Voto voto) {
-        mapavotos.put(voto,idvoto);
+        
+        mapavotos.put(idvoto,voto);
+        idvoto++;
     }
-    
 }

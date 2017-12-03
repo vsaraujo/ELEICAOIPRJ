@@ -16,6 +16,10 @@ public class Voto {
     
     private static Integer idvoto = 0;
     private ArrayList<Candidato> cand_selecionados;
+
+    public ArrayList<Candidato> getCand_selecionados() {
+        return cand_selecionados;
+    }
     private final Date horavoto;
     
     public Voto(){
@@ -23,6 +27,7 @@ public class Voto {
         horavoto = new Date();
         horavoto.getTime();
         idvoto++;
+        cand_selecionados = new ArrayList<Candidato>();
         
     }
 
@@ -35,6 +40,8 @@ public class Voto {
     }
 
     public void setCandidato(Candidato candidato) {
+        
+        System.out.println("###Voto: Selecionando candidato:"+candidato.getNome());
         cand_selecionados.add(candidato);
     }
     public void remCandidato(Candidato candidato) {
