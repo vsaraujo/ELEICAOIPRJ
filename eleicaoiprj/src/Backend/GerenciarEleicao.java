@@ -8,10 +8,6 @@ package Backend;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
 
 /**
  *
@@ -25,8 +21,17 @@ public class GerenciarEleicao {
     private Date dataeleicao;
     private TipoEleicao tipodeeleicao;
     private ComputarVotos mapvotos;
+    private static GerenciarEleicao instancia;
+
+    public static GerenciarEleicao getInstancia() {
+        
+        if(instancia==null){
+            instancia = new GerenciarEleicao();
+        }
+        return instancia;
+    }
     
-    public GerenciarEleicao(){        
+    private GerenciarEleicao(){        
         
         idGerenciar++;
         candidatos = new ArrayList<Candidato>();
@@ -111,15 +116,9 @@ public class GerenciarEleicao {
             System.out.println("#### Voto ind:"+ind.getKey());
             Voto voto = ind.getValue();
             
-            for(Candidato can : voto.getCand_selecionados()){
-                System.out.println("Candidato: "+can.getNome());
-            }
+            
         
         }
         
-    }
-
-    private void foreach(HashMap<Voto, Integer> mapavotos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
